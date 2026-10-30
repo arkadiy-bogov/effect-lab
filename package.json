@@ -1,0 +1,12 @@
+{
+  "name": "effect-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "config": "node scripts/generate-config.mjs",
+    "seo": "node scripts/generate-seo.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/build.mjs",
+    "serve": "python -m http.server 8080"
+  }
+}

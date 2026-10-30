@@ -173,6 +173,7 @@ registerSection({
     {
       id: "fisheye",
       order: 100,
+      hidden: true,
       title: "Фишай",
       description: "Бочкообразная дисторсия, как у сверхширокого объектива.",
       preview: { apply: applyFisheye, options: { amount: 0.7, zoom: 1.05 } },

@@ -1,15 +1,16 @@
-const SITE_ORIGIN = "https://eba.pluton-host.ru";
-const SITE_NAME = "FX Lab";
-const DEFAULT_TITLE = "Эффекты и онлайн-инструменты";
-const DEFAULT_DESCRIPTION =
-  "FX Lab: фото- и звуковые эффекты, генератор паролей, транслит и калькулятор дней. Всё считается локально в браузере.";
-const DEFAULT_IMAGE = `${SITE_ORIGIN}/assets/preview-source.png`;
+import { SITE } from "./site-config.js";
+
+const SITE_ORIGIN = SITE.origin;
+const SITE_NAME = SITE.name;
+const DEFAULT_TITLE = SITE.title;
+const DEFAULT_DESCRIPTION = SITE.description;
+const DEFAULT_IMAGE = SITE.image;
 
 const SECTION_SEO = {
   photo: {
     title: "Фото-эффекты онлайн",
     description:
-      "Онлайн-эффекты для фото в браузере: негатив, ЧБ, сепия, фишай, pixelate, blur, Instagram 2016 и degrade. Файлы не уходят на сервер.",
+      "Онлайн-эффекты для фото в браузере: негатив, ЧБ, сепия, pixelate, blur, Instagram 2016 и degrade. Файлы не уходят на сервер.",
   },
   utils: {
     title: "Онлайн-инструменты",
@@ -118,7 +119,7 @@ export function applySeo({ route, section = null, tool = null }) {
   ensureMeta("name", "robots", "index, follow");
   ensureMeta("name", "author", SITE_NAME);
   ensureMeta("property", "og:site_name", SITE_NAME);
-  ensureMeta("property", "og:locale", "ru_RU");
+  ensureMeta("property", "og:locale", SITE.locale || "ru_RU");
   ensureMeta("property", "og:type", page.type);
   ensureMeta("property", "og:title", page.title);
   ensureMeta("property", "og:description", page.description);

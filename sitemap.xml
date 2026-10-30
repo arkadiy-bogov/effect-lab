@@ -1,102 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://eba.pluton-host.ru/</loc>
+    <loc>https://example.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo</loc>
+    <loc>https://example.com/#/photo</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/degrade</loc>
+    <loc>https://example.com/#/photo/degrade</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/pixelate</loc>
+    <loc>https://example.com/#/photo/pixelate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/blur</loc>
+    <loc>https://example.com/#/photo/blur</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/ig2016</loc>
+    <loc>https://example.com/#/photo/ig2016</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/negative</loc>
+    <loc>https://example.com/#/photo/negative</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/grayscale</loc>
+    <loc>https://example.com/#/photo/grayscale</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/sepia</loc>
+    <loc>https://example.com/#/photo/sepia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/mirror</loc>
+    <loc>https://example.com/#/photo/mirror</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/vignette</loc>
+    <loc>https://example.com/#/photo/vignette</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/photo/fisheye</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://eba.pluton-host.ru/#/utils</loc>
+    <loc>https://example.com/#/utils</loc>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/utils/password</loc>
+    <loc>https://example.com/#/utils/password</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/utils/translit</loc>
+    <loc>https://example.com/#/utils/translit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/utils/days</loc>
+    <loc>https://example.com/#/utils/days</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/audio</loc>
+    <loc>https://example.com/#/audio</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/audio/degrade</loc>
+    <loc>https://example.com/#/audio/degrade</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/#/video</loc>
+    <loc>https://example.com/#/video</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://eba.pluton-host.ru/pretty-cure/</loc>
+    <loc>https://example.com/pretty-cure/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

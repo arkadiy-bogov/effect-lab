@@ -26,10 +26,12 @@ export function getSection(id) {
 
 export function getTools(sectionId) {
   return [...tools.values()]
-    .filter((t) => t.sectionId === sectionId)
+    .filter((t) => t.sectionId === sectionId && !t.hidden)
     .sort((a, b) => (a.order ?? 100) - (b.order ?? 100));
 }
 
 export function getTool(sectionId, toolId) {
-  return tools.get(`${sectionId}/${toolId}`) || null;
+  const tool = tools.get(`${sectionId}/${toolId}`) || null;
+  if (!tool || tool.hidden) return null;
+  return tool;
 }
