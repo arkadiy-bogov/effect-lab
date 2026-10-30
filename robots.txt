@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eba.pluton-host.ru/sitemap.xml

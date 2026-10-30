@@ -1,0 +1,10 @@
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+*.pem
+*_deploy*.py
+.vscode/
+.idea/
+node_modules/
