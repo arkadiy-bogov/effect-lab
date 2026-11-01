@@ -19,5 +19,6 @@ export const APP_ROUTES = [
   { path: "/#/utils/days", changefreq: "monthly", priority: "0.7" },
   { path: "/#/audio", changefreq: "weekly", priority: "0.8" },
   { path: "/#/audio/degrade", changefreq: "monthly", priority: "0.7" },
+  { path: "/#/audio/tts", changefreq: "monthly", priority: "0.7" },
   { path: "/#/video", changefreq: "monthly", priority: "0.4" },
 ];

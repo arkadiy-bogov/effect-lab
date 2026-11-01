@@ -7,6 +7,10 @@ import {
   setupDropzone,
 } from "../core/ui.js";
 import { degradeAudio, drawWaveform } from "../effects/audio/degrade.js";
+import { mountTextToSpeech } from "./audio-tts.js";
+
+const DEMO_SRC = "assets/demo-call.wav";
+const DEMO_NAME = "demo-call.wav";
 
 function mountAudioDegrade(root) {
   const state = {
@@ -35,28 +39,66 @@ function mountAudioDegrade(root) {
 
   const drop = el("div", { className: "dropzone" }, [
     el("strong", { text: "Перетащите аудио сюда" }),
-    el("span", { text: "MP3, WAV, OGG, M4A - обработка в браузере" }),
+    el("span", { text: "Или оставьте демо-звонок. MP3, WAV, OGG, M4A" }),
   ]);
 
+  function isAudioFile(file) {
+    if (!file) return false;
+    if (file.type && file.type.startsWith("audio/")) return true;
+    return /\.(mp3|wav|ogg|m4a|aac|flac|webm|opus)$/i.test(file.name || "");
+  }
+
+  function clearResult() {
+    downloadBtn.disabled = true;
+    if (state.resultUrl) URL.revokeObjectURL(state.resultUrl);
+    state.resultUrl = null;
+  }
+
+  async function setSourceBuffer(buffer, fileName, bytes, previewUrl) {
+    state.buffer = buffer;
+    state.file = { name: fileName, size: bytes };
+    applyBtn.disabled = false;
+    clearResult();
+    if (previewUrl) {
+      audio.src = previewUrl;
+    } else {
+      audio.removeAttribute("src");
+    }
+    status.textContent = `${fileName} · ${formatBytes(bytes)}`;
+  }
+
   setupDropzone(drop, {
-    accept: "audio/*",
+    // Расширения помогают Android, где audio/* часто игнорируется
+    accept: "audio/*,audio/mpeg,audio/wav,audio/ogg,audio/mp4,.mp3,.wav,.ogg,.m4a,.aac,.flac",
     onFile: async (file) => {
       try {
+        if (!isAudioFile(file)) {
+          status.textContent = "Выберите аудиофайл (MP3, WAV, OGG, M4A)";
+          return;
+        }
         status.textContent = "Читаем файл...";
-        state.file = file;
-        state.buffer = await file.arrayBuffer();
-        applyBtn.disabled = false;
-        downloadBtn.disabled = true;
-        if (state.resultUrl) URL.revokeObjectURL(state.resultUrl);
-        state.resultUrl = null;
-        audio.removeAttribute("src");
-        status.textContent = `${file.name} · ${formatBytes(file.size)}`;
+        const buffer = await file.arrayBuffer();
+        const url = URL.createObjectURL(file);
+        await setSourceBuffer(buffer, file.name, file.size, url);
       } catch (err) {
         console.error(err);
         status.textContent = "Не удалось прочитать аудио";
       }
     },
   });
+
+  async function loadDemo() {
+    try {
+      status.textContent = "Загрузка демо...";
+      const res = await fetch(DEMO_SRC);
+      if (!res.ok) throw new Error(`demo HTTP ${res.status}`);
+      const buffer = await res.arrayBuffer();
+      await setSourceBuffer(buffer, DEMO_NAME, buffer.byteLength, DEMO_SRC);
+    } catch (err) {
+      console.error(err);
+      status.textContent = "Демо не загрузилось - выберите файл вручную";
+    }
+  }
 
   const controls = el("div", { className: "controls" }, [
     controlRange({
@@ -130,7 +172,9 @@ function mountAudioDegrade(root) {
       status.textContent = `Готово · ${result.sampleRate} Hz · ${result.duration.toFixed(2)}s · ${formatBytes(result.blob.size)}`;
     } catch (err) {
       console.error(err);
-      status.textContent = "Ошибка обработки аудио";
+      status.textContent = err?.message
+        ? `Ошибка обработки аудио: ${err.message}`
+        : "Ошибка обработки аудио";
     } finally {
       applyBtn.disabled = !state.buffer;
     }
@@ -155,11 +199,13 @@ function mountAudioDegrade(root) {
         el("div", { className: "toolbar" }, [applyBtn, downloadBtn]),
         el("p", {
           className: "hint",
-          text: "Ниже sample rate и bit depth - злее телефонный/кассетный характер.",
+          text: "По умолчанию загружен синтетический демо-звонок. Ниже sample rate и bit depth - злее телефонный характер.",
         }),
       ]),
     ])
   );
+
+  loadDemo();
 
   return {
     dispose() {
@@ -174,7 +220,7 @@ registerSection({
   order: 20,
   title: "Звук",
   navLabel: "Звук",
-  description: "Аудио-эффекты в браузере. Пока один инструмент - осмысленное ухудшение качества.",
+  description: "Аудио в браузере: ухудшение качества и озвучка текста голосами устройства.",
   tools: [
     {
       id: "degrade",
@@ -182,6 +228,13 @@ registerSection({
       title: "Degrade Quality",
       description: "Даунсемпл, bitcrush, soft-clip и шум. На выходе WAV.",
       mount: mountAudioDegrade,
+    },
+    {
+      id: "tts",
+      order: 20,
+      title: "Озвучка текста",
+      description: "Вставьте текст и прослушайте его голосами системы. Без отправки на сервер.",
+      mount: mountTextToSpeech,
     },
   ],
 });

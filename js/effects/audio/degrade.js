@@ -38,7 +38,10 @@ export async function degradeAudio(arrayBuffer, options = {}) {
     drive = 1.6,
   } = options;
 
-  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const AudioCtx = globalThis.AudioContext || globalThis.webkitAudioContext;
+  if (!AudioCtx) {
+    throw new Error("Web Audio API is not available");
+  }
   const ctx = new AudioCtx();
   let decoded;
   try {
@@ -53,13 +56,13 @@ export async function degradeAudio(arrayBuffer, options = {}) {
   const out = new Float32Array(outLen);
 
   // Downsample + soft lowpass via box average
-  const window = Math.max(1, Math.round(decoded.sampleRate / Math.max(1000, lowpass)));
+  const box = Math.max(1, Math.round(decoded.sampleRate / Math.max(1000, lowpass)));
   for (let i = 0; i < outLen; i++) {
     const center = Math.floor(i * ratio);
     let sum = 0;
     let n = 0;
-    const a = Math.max(0, center - window);
-    const b = Math.min(channel.length - 1, center + window);
+    const a = Math.max(0, center - box);
+    const b = Math.min(channel.length - 1, center + box);
     for (let j = a; j <= b; j++) {
       sum += channel[j];
       n++;
